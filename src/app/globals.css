@@ -1,40 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --bg-main-color: hsl(var(--background));
+  --color-background: hsl(var(--background));
+
+  --color-primary: hsl(var(--primary));  /*primary text*/
+  --color-secondary: hsl(var(--secondary)); /*interactive elements, cards, tabs*/
+  --color-accent: hsl(var(--accent));  /*Hover states, small details*/
+  --color-destructive: hsl(var(--destructive));
+  --color-muted: hsl(var(--muted)); /*secondary text, less important staff*/
 }
 
-@layer base{
-    :root{
-      --background: 200 90% 85%;
-    }
-
-    .dark{
-      --background: 222 17% 2%;
-    }
+@layer base {
+  :root {
+    --background: 285 27% 11%;
+    
+    --primary: 0 0% 0%; /* #000000 */
+    --secondary: 217 76% 33%; 
+    --accent: 150 3% 24%; /* #3A3E3B */
+    --destructive: 240 18% 94%; /* #F0EFF4 */
+    --muted: 305 15% 56%; /* #9E829C */
+  }
+  
+  .dark {
+    --background: 222 17% 2%;
+  }
 }
 
 body{
-  background-color: black;
+  font-family: "Cascadia Code", monospace;
+  background-color: var(--color-background);
 }
 
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
-
-  @media (width>= 640px){
+  
+  @media (width>= 640px) {
     max-width: 640px;
   }
-  @media (width>= 768px){
+  @media (width>= 768px) {
     max-width: 768px;
   }
-  @media (width>= 1024px){
+  @media (width>= 1024px) {
     max-width: 1024px;
   }
-  @media (width>= 1280px){
+  @media (width>= 1280px) {
     max-width: 1280px;
   }
-  @media (width>= 1400px){
+  @media (width>= 1400px) {
     max-width: 1400px;
   }
 }
+
+
+

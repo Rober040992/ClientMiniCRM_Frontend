@@ -1,15 +1,15 @@
 // Minimal Google OAuth login page.
 
-'use client';
+"use client";
 
-import { createSupabaseBrowserClient } from '@/lib/supabase/browser';
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export default function LoginPage() {
   const supabase = createSupabaseBrowserClient();
 
   const handleGoogleLogin = async () => {
     await supabase.auth.signInWithOAuth({
-      provider: 'google',
+      provider: "google",
       options: {
         redirectTo: `${location.origin}/auth/callback`,
       },
@@ -17,11 +17,20 @@ export default function LoginPage() {
   };
 
   return (
-    <main>
-      <h1>Login</h1>
-      <button type="button" onClick={handleGoogleLogin}>
-        Login with Google
-      </button>
+    <main className="bg-background min-h-screen flex flex-col justify-center">
+      <div className="container">
+        <div className="flex-col justify-between">
+          <h1>Login</h1>
+
+          <button
+            className="text-muted items-center rounded-md border border-white/15 px-4 py-2 text-sm hover:text-accent pointer"
+            type="button"
+            onClick={handleGoogleLogin}
+          >
+            Login with Google
+          </button>
+        </div>
+      </div>
     </main>
   );
 }

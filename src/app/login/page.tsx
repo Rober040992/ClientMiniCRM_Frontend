@@ -17,9 +17,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="bg-background min-h-screen flex flex-col justify-center">
-      <div className="container">
-        <div className="flex-col justify-between">
+    <main className="container bg-background min-h-screen flex flex-col justify-center">
+      <div className="">
+        <div className="flex-cotal justify-between">
           <h1>Login</h1>
 
           <button

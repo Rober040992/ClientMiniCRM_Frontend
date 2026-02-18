@@ -8,7 +8,7 @@ export default async function ClientsPage() {
 
   return (
     <>
-      <h1 className="text-primary">Client list</h1>
+      <h1 className="container text-primary  py-4 text-2xl">Client list</h1>
       <div>
         <ul className="flex flex-col gap-4">
           {result.map(({ id, name, email }: Client) => (

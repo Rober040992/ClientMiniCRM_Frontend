@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+html,
+body {
+  height: 100%;
+  @apply bg-background;
+}
+
+body {
+  /* Base */
+  background-color: hsl(var(--background));
+  color: hsl(var(--primary));
+  font-family:
+    "Cascadia Code", ui-monospace,
+    "Liberation Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* Layout baseline */
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Make media behave nicely */
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Better focus (keyboard) */
+:focus-visible {
+  outline: 2px solid hsl(var(--secondary));
+  outline-offset: 2px;
+}

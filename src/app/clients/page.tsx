@@ -10,11 +10,11 @@ export default async function ClientsPage() {
     <>
       <h1 className="container text-primary  py-4 text-2xl">Client list</h1>
       <div>
-        <ul className="flex flex-col gap-4">
+        <ul className="container flex flex-col gap-4">
           {result.map(({ id, name, email }: Client) => (
-            <Card key={id} className="container flex gap-8">
-              <h4 className="">{name}</h4>
-              <h4 className="">{email}</h4>
+            <Card key={id} className="flex gap-8">
+              <h4 className="">Name: {name}</h4>
+              <h4 className="">Email: {email}</h4>
             </Card>
           ))}
         </ul>

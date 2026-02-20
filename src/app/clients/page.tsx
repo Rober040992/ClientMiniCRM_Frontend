@@ -1,16 +1,19 @@
 import { Card } from "@/components/ui/card";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import  LogoutButton  from "@/components/LogoutButton";
 
 export default async function ClientsPage() {
   console.log("Checking session on /clients");
   const supabase = await createSupabaseServerClient();
   // Get authenticated user
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // Redirect if not authenticated
   if (!user) {
-    console.log("user not authenticated => REDIRECTED to /login")
+    console.log("user not authenticated => REDIRECTED to /login");
     redirect("/login");
   }
   const clientsFetch = `${process.env.API_BASE_URL}/clients`;
@@ -27,6 +30,9 @@ export default async function ClientsPage() {
   return (
     <>
       <h1 className="container text-primary  py-4 text-2xl">Client list</h1>
+        <div className="container flex justify-end py-4">
+          <LogoutButton />
+        </div>
       <div>
         <ul className="container flex flex-col gap-4">
           {result.map(({ id, name, email }: Client) => (

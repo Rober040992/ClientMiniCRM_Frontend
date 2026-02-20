@@ -6,12 +6,16 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export default function LoginPage() {
   const supabase = createSupabaseBrowserClient();
-
+  
   const handleGoogleLogin = async () => {
+    console.log("Starting Google OAuth flow...");
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
+        // URL where Supabase sends the user after Google OAuth.
         redirectTo: `${location.origin}/auth/callback`,
+        // Final internal route after session is created
+        queryParams: { next: "/clients" },
       },
     });
   };

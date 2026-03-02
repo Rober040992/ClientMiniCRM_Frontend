@@ -1,11 +1,8 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 html,
 body {
   height: 100%;
-  @apply bg-background;
+  /* background set on body below — no need to @apply here */
 }
 
 body {
@@ -37,9 +34,9 @@ a {
   text-decoration: none;
 }
 
-/* Better focus (keyboard) */
+/* Better focus (keyboard) — use --color-ring which is always valid in any colour space */
 :focus-visible {
-  outline: 2px solid hsl(var(--secondary));
+  outline: 2px solid var(--color-ring);
   outline-offset: 2px;
 }
 

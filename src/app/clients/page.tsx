@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
+
 
 export default async function ClientsPage() {
   console.log("Checking session on /clients");
@@ -60,9 +62,19 @@ export default async function ClientsPage() {
 
       {/* Page content */}
       <main className="container mx-auto max-w-3xl px-6 py-8">
-        <h2 className="text-2xl font-semibold text-foreground mb-6">
-          Clients
-        </h2>
+        {/* Heading + action row */}
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-semibold text-foreground">Clients</h2>
+          <Link
+            href="/clients/new"
+            className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition-all hover:brightness-110 hover:shadow-accent/35 hover:-translate-y-0.5"
+          >
+            <svg aria-hidden className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            New client
+          </Link>
+        </div>
 
         <ul className="flex flex-col gap-3">
           {result.map(({ id, name, email }: Client) => (

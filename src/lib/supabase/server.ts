@@ -14,9 +14,16 @@ export async function createSupabaseServerClient() {
       cookies: {
         getAll: () => cookieStore.getAll(),
         setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
-          );
+          // Cookie writes are only allowed in Server Actions / Route Handlers.
+          // During Server Component renders this throws, so we swallow it —
+          // the session refresh will be persisted by the middleware instead.
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch {
+            // Intentional no-op from Server Component context.
+          }
         },
       },
     },

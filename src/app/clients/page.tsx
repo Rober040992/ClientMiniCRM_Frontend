@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
-
+import DashboardHeader from "@/components/DashboardHeader";
 
 export default async function ClientsPage() {
   console.log("Checking session on /clients");
@@ -28,37 +28,16 @@ export default async function ClientsPage() {
   return (
     <div className="min-h-screen bg-background">
 
-      {/* Top header bar */}
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-card/80 backdrop-blur-sm px-6 py-4">
-        <div className="flex items-center gap-3">
-          {/* Logo mark */}
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-accent/15 border border-accent/30">
-            <svg
-              aria-hidden
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="oklch(0.58 0.22 288)"
-              strokeWidth={1.8}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="2" y="7" width="20" height="14" rx="2" />
-              <path d="M16 7V5a2 2 0 0 0-4 0v2" />
-              <line x1="12" y1="12" x2="12" y2="16" />
-            </svg>
-          </div>
-          <h1 className="text-lg font-semibold text-foreground tracking-tight">
-            Mini<span className="text-accent">CRM</span>
-          </h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="hidden sm:block text-sm text-muted-foreground">
-            {user.email}
-          </span>
-          <LogoutButton />
-        </div>
-      </header>
+      <DashboardHeader
+        right={
+          <>
+            <span className="hidden sm:block text-sm text-muted-foreground">
+              {user.email}
+            </span>
+            <LogoutButton />
+          </>
+        }
+      />
 
       {/* Page content */}
       <main className="container mx-auto max-w-3xl px-6 py-8">

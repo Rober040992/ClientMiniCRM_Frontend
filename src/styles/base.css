@@ -9,12 +9,10 @@ body {
 }
 
 body {
-  /* Base */
-  background-color: hsl(var(--background));
-  color: hsl(var(--primary));
-  font-family:
-    "Cascadia Code", ui-monospace,
-    "Liberation Mono", "Courier New", monospace;
+  /* Base — font-family is set via CSS variable from layout.tsx */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -49,19 +47,23 @@ a {
   margin-inline: auto;
   padding-inline: 2rem;
 
-  @media (width>= 640px) {
+  @media (width>=640px) {
     max-width: 640px;
   }
-  @media (width>= 768px) {
+
+  @media (width>=768px) {
     max-width: 768px;
   }
-  @media (width>= 1024px) {
+
+  @media (width>=1024px) {
     max-width: 1024px;
   }
-  @media (width>= 1280px) {
+
+  @media (width>=1280px) {
     max-width: 1280px;
   }
-  @media (width>= 1400px) {
+
+  @media (width>=1400px) {
     max-width: 1400px;
   }
 }

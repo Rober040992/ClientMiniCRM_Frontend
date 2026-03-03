@@ -1,5 +1,6 @@
 // Public landing page — dark hero with violet accent
 import Link from "next/link";
+import { BriefcaseIcon } from "@/components/icons";
 
 export default function HomePage() {
   return (
@@ -20,20 +21,7 @@ export default function HomePage() {
 
         {/* Logo mark */}
         <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 mb-2">
-          <svg
-            aria-hidden
-            className="w-7 h-7"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="oklch(0.58 0.22 288)"
-            strokeWidth={1.8}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="2" y="7" width="20" height="14" rx="2" />
-            <path d="M16 7V5a2 2 0 0 0-4 0v2" />
-            <line x1="12" y1="12" x2="12" y2="16" />
-          </svg>
+          <BriefcaseIcon className="w-7 h-7" />
         </div>
 
         {/* Brand name */}

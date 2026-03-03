@@ -4,6 +4,7 @@ import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
 import DashboardHeader from "@/components/DashboardHeader";
+import { PlusIcon } from "@/components/icons";
 
 export default async function ClientsPage() {
   console.log("Checking session on /clients");
@@ -48,9 +49,7 @@ export default async function ClientsPage() {
             href="/clients/new"
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition-all hover:brightness-110 hover:shadow-accent/35 hover:-translate-y-0.5"
           >
-            <svg aria-hidden className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
+            <PlusIcon />
             New client
           </Link>
         </div>

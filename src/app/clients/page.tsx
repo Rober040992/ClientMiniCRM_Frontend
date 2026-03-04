@@ -61,7 +61,7 @@ export default async function ClientsPage() {
               className="flex flex-wrap items-center gap-x-8 gap-y-1 px-6 py-4 border border-border bg-card hover:border-accent/40 hover:ring-1 hover:ring-accent/20 transition-all"
             >
               {/* Client name */}
-              <span className="text-sm font-medium text-foreground min-w-[140px]">
+              <span className="text-sm font-medium text-foreground min-w-35">
                 {name}
               </span>
               {/* Email */}

@@ -6,11 +6,30 @@ import LogoutButton from "@/components/LogoutButton";
 import DashboardHeader from "@/components/DashboardHeader";
 import { PlusIcon } from "@/components/icons";
 
+type Client = { id: number; name: string; email: string };
+
+// Runtime type guard for client records returned by the external API
+function isClient(value: unknown): value is Client {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  // value as object with string key , unknown key values
+  const record = value as Record<string, unknown>;
+
+  return (
+    typeof record.id === "number" &&
+    typeof record.name === "string" &&
+    typeof record.email === "string"
+  );
+}
+
 export default async function ClientsPage() {
   console.log("Checking session on /clients");
   const supabase = await createSupabaseServerClient();
   // Get authenticated user
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // Redirect if not authenticated
   if (!user) {
@@ -20,15 +39,19 @@ export default async function ClientsPage() {
   const clientsFetch = `${process.env.API_BASE_URL}/clients`;
   const clientsList = await fetch(clientsFetch);
 
-  if (!clientsList.ok) { throw new Error("Failed to fetch clients") }
+  if (!clientsList.ok) {
+    throw new Error("Failed to fetch clients");
+  }
 
-  const result = await clientsList.json();
+  // Treat API data as unknown until we validate its shape.
+  const result: unknown = await clientsList.json();
 
-  type Client = { id: number; name: string; email: string };
+  if (!Array.isArray(result) || !result.every(isClient)) {
+    throw new Error("Invalid clients response");
+  }
 
   return (
     <div className="min-h-screen bg-background">
-
       <DashboardHeader
         right={
           <>
@@ -79,4 +102,3 @@ export default async function ClientsPage() {
     </div>
   );
 }
-

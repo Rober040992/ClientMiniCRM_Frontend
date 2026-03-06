@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClientMiniCRM Frontend
 
-## Getting Started
+Minimal frontend MVP for a private client tracker.
 
-First, run the development server:
+## Current stack
+
+- Next.js 16 App Router
+- TypeScript strict
+- Tailwind CSS v4
+- shadcn/ui primitives
+- Supabase SSR auth with Google OAuth
+
+## What the MVP currently does
+
+- Public landing page at `/`
+- Login page at `/login`
+- Google OAuth callback at `/auth/callback`
+- Protected client list at `/clients`
+- Protected create-client page at `/clients/new`
+
+## Development
+
+Start the frontend:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs on `http://localhost:3001`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local` with:
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-project-url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+API_BASE_URL="http://localhost:3000/api/v1"
+```
 
-To learn more about Next.js, take a look at the following resources:
+Notes:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are used by both browser and server Supabase clients.
+- `API_BASE_URL` must point to the backend API that serves the client resources.
+- As of Friday, March 6, 2026, this frontend expects the backend API on port `3000` and the frontend on port `3001`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Authentication flow
 
-## Deploy on Vercel
+1. The user opens `/login`.
+2. If a server-side session already exists, the page redirects to `/clients`.
+3. The Google button starts Supabase OAuth in the browser.
+4. Supabase redirects back to `/auth/callback?code=...`.
+5. The callback exchanges the code for a session and writes auth cookies.
+6. Protected pages read the authenticated user server-side and redirect unauthenticated users to `/login`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Route protection
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/lib/supabase/auth-session-middleware.ts` refreshes the Supabase session from request cookies.
+- `src/proxy.ts` is the active Next.js entrypoint used by this project to run that refresh on matching requests.
+- The page-level guards still perform the final server-side redirect checks for `/login`, `/clients`, and `/clients/new`.
+
+## Main project structure
+
+```text
+src/
+  app/
+    auth/callback/route.ts
+    clients/page.tsx
+    clients/new/page.tsx
+    clients/new/actions.ts
+    login/page.tsx
+    page.tsx
+  components/
+  lib/supabase/
+  proxy.ts
+```
+
+## Validation
+
+Run lint after code changes:
+
+```bash
+npm run lint
+```
+
+## MVP boundaries
+
+- Keep changes minimal and explicit.
+- Avoid new dependencies unless approved.
+- Prefer Server Components for reads.
+- Prefer Server Actions for writes.
+- Do not use `useEffect` for primary data fetching.

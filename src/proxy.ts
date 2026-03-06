@@ -1,7 +1,8 @@
 import type { NextRequest } from "next/server";
 import { refreshAuthSession } from "@/lib/supabase/auth-session-middleware";
 
-// Next.js requires this entry file name.
+// In this project, `proxy.ts` is the active request entrypoint used to refresh
+// the Supabase session before protected routes read auth server-side.
 export async function proxy(request: NextRequest) {
   return refreshAuthSession(request);
 }

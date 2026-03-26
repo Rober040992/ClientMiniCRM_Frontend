@@ -82,11 +82,20 @@ export default async function ClientDetailPage({
       />
 
       <main className="container mx-auto max-w-3xl px-6 py-8">
-        <div className="mb-6">
-          <p className="text-sm text-muted-foreground">Client detail</p>
-          <h2 className="text-2xl font-semibold text-foreground">
-            {clientData.name}
-          </h2>
+        <div className="mb-6 flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm text-muted-foreground">Client detail</p>
+            <h2 className="text-2xl font-semibold text-foreground">
+              {clientData.name}
+            </h2>
+          </div>
+
+          <Link
+            href={`/clients/${clientData.id}/edit`}
+            className="inline-flex items-center rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-accent/35"
+          >
+            Edit client
+          </Link>
         </div>
 
         <section className="rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/30">

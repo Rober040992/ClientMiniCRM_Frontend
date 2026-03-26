@@ -28,7 +28,7 @@ export default async function NewClientPage() {
       />
 
       {/* Page content */}
-      <main className="container mx-auto max-w-lg px-6 py-8">
+      <main className="container max-w-lg py-8">
         <h2 className="text-2xl font-semibold text-foreground mb-6">New client</h2>
 
         {/* Form card */}

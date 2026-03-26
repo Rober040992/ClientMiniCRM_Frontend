@@ -80,7 +80,7 @@ export default async function EditClientPage({ params }: EditClientPageProps) {
         }
       />
 
-      <main className="container mx-auto max-w-lg px-6 py-8">
+      <main className="container max-w-lg py-8">
         <h2 className="mb-6 text-2xl font-semibold text-foreground">Edit client data</h2>
 
         <div className="rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/30">

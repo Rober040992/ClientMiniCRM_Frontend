@@ -65,7 +65,7 @@ export default async function ClientsPage() {
       />
 
       {/* Page content */}
-      <main className="container mx-auto max-w-3xl px-6 py-8">
+      <main className="container max-w-3xl py-8">
         {/* Heading + action row */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-semibold text-foreground">Clients</h2>
@@ -78,29 +78,35 @@ export default async function ClientsPage() {
           </Link>
         </div>
 
-        <ul className="flex flex-col gap-3">
-          {result.map(({ id, name, email }: Client) => (
-            <li key={id}>
-              <DeleteClientButton clientId={id} size="xs" className="flex justify-end mb-1 mt-2"/>
-              <Card className="flex flex-wrap items-center gap-3 border border-border bg-card px-6 py-4 transition-all hover:border-accent/40 hover:ring-1 hover:ring-accent/20">
-                <Link
-                  href={`/clients/${id}`}
-                  className="flex min-w-0 flex-1 flex-wrap items-center gap-x-8 gap-y-1"
-                >
-                  <span className="min-w-35 text-sm font-medium text-foreground">
-                    {name}
-                  </span>
-                  <span className="flex-1 text-sm text-muted-foreground">
-                    {email}
-                  </span>
-                  <span className="text-xs font-mono text-muted-foreground/60">
-                    #{id}
-                  </span>
-                </Link>
-              </Card>
-            </li>
-          ))}
-        </ul>
+        <div className="flex justify-center w-full">
+          <ul className="flex flex-col gap-3">
+            {result.map(({ id, name, email }: Client) => (
+              <li key={id}>
+                <DeleteClientButton
+                  clientId={id}
+                  size="xs"
+                  className="mb-1 mt-2 flex justify-end"
+                />
+                <Card className="flex-wrap items-center gap-3 px-6 py-4 transition-all hover:border-accent/40 hover:ring-1 hover:ring-accent/20">
+                  <Link
+                    href={`/clients/${id}`}
+                    className="flex min-w-0 flex-1 flex-wrap items-center gap-x-8 gap-y-1"
+                  >
+                    <span className="min-w-35 text-sm font-medium text-foreground">
+                      {name}
+                    </span>
+                    <span className="flex-1 text-sm text-muted-foreground">
+                      {email}
+                    </span>
+                    <span className="text-xs font-mono text-muted-foreground/60">
+                      #{id}
+                    </span>
+                  </Link>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </div>
       </main>
     </div>
   );

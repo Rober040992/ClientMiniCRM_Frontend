@@ -17,7 +17,7 @@ export default function HomePage() {
       {/* Brand card */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
         {/* Logo mark */}
-        <div className="mb-2 text-center" style={{ perspective: "1000px" }}>
+        <div className="mb-2" style={{ perspective: "1000px" }}>
           <div
             className="flex h-20 w-20 items-center justify-center rounded-2xl border border-accent/30 bg-accent/15"
             style={{

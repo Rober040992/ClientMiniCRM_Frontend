@@ -5,6 +5,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
 import DashboardHeader from "@/components/DashboardHeader";
 import { PlusIcon } from "@/components/icons";
+import DeleteClientButton from "./_delete-client-button";
 
 type Client = { id: number; name: string; email: string };
 
@@ -80,22 +81,23 @@ export default async function ClientsPage() {
         <ul className="flex flex-col gap-3">
           {result.map(({ id, name, email }: Client) => (
             <li key={id}>
-              <Link href={`/clients/${id}`} className="block">
-                <Card className="flex flex-wrap items-center gap-x-8 gap-y-1 border border-border bg-card px-6 py-4 transition-all hover:border-accent/40 hover:ring-1 hover:ring-accent/20">
-                  {/* Client name */}
+              <DeleteClientButton clientId={id} size="xs" className="flex justify-end mb-1 mt-2"/>
+              <Card className="flex flex-wrap items-center gap-3 border border-border bg-card px-6 py-4 transition-all hover:border-accent/40 hover:ring-1 hover:ring-accent/20">
+                <Link
+                  href={`/clients/${id}`}
+                  className="flex min-w-0 flex-1 flex-wrap items-center gap-x-8 gap-y-1"
+                >
                   <span className="min-w-35 text-sm font-medium text-foreground">
                     {name}
                   </span>
-                  {/* Email */}
                   <span className="flex-1 text-sm text-muted-foreground">
                     {email}
                   </span>
-                  {/* ID badge */}
                   <span className="text-xs font-mono text-muted-foreground/60">
                     #{id}
                   </span>
-                </Card>
-              </Link>
+                </Link>
+              </Card>
             </li>
           ))}
         </ul>

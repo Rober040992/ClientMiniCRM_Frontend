@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import DashboardHeader from "@/components/DashboardHeader";
 import { ArrowLeftIcon } from "@/components/icons";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import DeleteClientButton from "../_delete-client-button";
 
 type Client = {
   id: number;
@@ -90,12 +91,15 @@ export default async function ClientDetailPage({
             </h2>
           </div>
 
-          <Link
-            href={`/clients/${clientData.id}/edit`}
-            className="inline-flex items-center rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-accent/35"
-          >
-            Edit client
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href={`/clients/${clientData.id}/edit`}
+              className="inline-flex items-center rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-accent/35"
+            >
+              Edit client
+            </Link>
+            <DeleteClientButton clientId={clientData.id} />
+          </div>
         </div>
 
         <section className="rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/30">
